@@ -12,8 +12,9 @@ import {
 } from "lucide-react";
 import { useEffect, useMemo, useState, type ChangeEvent, type FormEvent } from "react";
 import RatingStars from "@/components/RatingStars";
+import PageHeader from "@/components/PageHeader";
 import { SERVICE_OPTIONS } from "@/data/content";
-import { appendReview, getPublishedReviews } from "@/data/reviews";
+import { appendReview, getPublishedReviews, getStoredReviews } from "@/data/reviews";
 import type { Review } from "@/types";
 
 interface ReviewFormState {
@@ -56,6 +57,7 @@ export default function Reviews() {
   const [errors, setErrors] = useState<Partial<Record<keyof ReviewFormState, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [successVisible, setSuccessVisible] = useState(false);
+  const [lastSubmissionStatus, setLastSubmissionStatus] = useState<Review['status'] | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [expandedReviews, setExpandedReviews] = useState<Record<string, boolean>>({});
   const [reduceMotion, setReduceMotion] = useState(false);
@@ -142,6 +144,35 @@ export default function Reviews() {
     reader.readAsDataURL(file);
   };
 
+  // --- Automatic screening helpers ---
+  const BANNED_WORDS = ["viagra", "free money", "casino", "xxx"];
+
+  const containsBannedWords = (text: string) =>
+    BANNED_WORDS.some((w) => text.toLowerCase().includes(w));
+
+  const isDuplicateMessage = (message: string) => {
+    const stored = getStoredReviews();
+    const normalized = message.trim().toLowerCase();
+    return stored.some((r) => r.message.trim().toLowerCase() === normalized);
+  };
+
+  const isRateLimited = (email: string) => {
+    try {
+      const stored = getStoredReviews();
+      const recent = stored.filter((r) => r.email === email && Date.now() - new Date(r.createdAt).getTime() < 1000 * 60 * 60 * 24);
+      return recent.length >= 3; // 3 submissions per 24h
+    } catch {
+      return false;
+    }
+  };
+
+  const determineStatusForSubmission = (values: ReviewFormState): Review['status'] => {
+    if (containsBannedWords(values.title + " " + values.message)) return "pending";
+    if (isDuplicateMessage(values.message)) return "pending";
+    if (isRateLimited(values.email)) return "pending";
+    return "published";
+  };
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const nextErrors = validateForm();
@@ -154,6 +185,8 @@ export default function Reviews() {
     setIsSubmitting(true);
     await new Promise((resolve) => window.setTimeout(resolve, 1000));
 
+    const decidedStatus = determineStatusForSubmission(formData);
+
     const newReview: Review = {
       id: `${Date.now()}-${Math.random().toString(16).slice(2)}`,
       customerName: formData.customerName.trim(),
@@ -163,7 +196,7 @@ export default function Reviews() {
       title: formData.title.trim(),
       message: formData.message.trim(),
       image: formData.photo,
-      status: "published",
+      status: decidedStatus,
       createdAt: new Date().toISOString(),
     };
 
@@ -172,6 +205,7 @@ export default function Reviews() {
     setFormData(initialFormState);
     setErrors({});
     setIsSubmitting(false);
+    setLastSubmissionStatus(newReview.status);
     setSuccessVisible(true);
     setIsModalOpen(false);
     window.setTimeout(() => setSuccessVisible(false), 2600);
@@ -179,29 +213,23 @@ export default function Reviews() {
 
   return (
     <>
+      <PageHeader
+        eyebrow="Customer Feedback"
+        title="Recent reviews"
+        description={"Read real feedback from customers and share your experience."}
+      />
+
       <section className="min-h-screen bg-[#dfeff7] py-12 sm:py-16">
         <div className="container-page">
-          <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-            <div>
-              <p className="eyebrow inline-flex items-center gap-2">
-                <Sparkles className="h-3.5 w-3.5" />
-                Customer Feedback
-              </p>
-              <h1 className="mt-4 text-4xl font-semibold leading-tight text-ink-900 sm:text-[3rem]">
-                Recent reviews
-              </h1>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <button type="button" onClick={() => setIsModalOpen(true)} className="btn-primary hidden sm:inline-flex">
-                <Star className="h-4 w-4 fill-current" />
-                Share Your Experience
-              </button>
-              <div className="inline-flex items-center gap-2 rounded-full border border-sky-300 bg-white/70 px-3.5 py-2 text-sm font-medium text-sky-700 shadow-[0_12px_30px_-20px_rgba(14,165,233,0.45)] backdrop-blur-sm">
-                <BadgeCheck className="h-4 w-4" />
-                {reviews.length} published reviews
-              </div>
-            </div>
+          <div className="mb-8 flex items-center justify-end">
+            <button type="button" onClick={() => setIsModalOpen(true)} className="btn-primary hidden sm:inline-flex">
+              <Star className="h-4 w-4 fill-current" />
+              Share Your Experience
+            </button>
+            {/* <div className="ml-3 inline-flex items-center gap-2 rounded-full border border-sky-300 bg-white/70 px-3.5 py-2 text-sm font-medium text-sky-700 shadow-[0_12px_30px_-20px_rgba(14,165,233,0.45)] backdrop-blur-sm">
+              <BadgeCheck className="h-4 w-4" />
+              {reviews.length} published reviews
+            </div> */}
           </div>
 
           {reviews.length === 0 ? (
@@ -242,9 +270,9 @@ export default function Reviews() {
                           </div>
                         </div>
 
-                        <span className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-700">
+                        {/* <span className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-emerald-700">
                           Published
-                        </span>
+                        </span> */}
                       </div>
 
                       <div className="mt-5 flex items-center justify-between gap-3 text-sm text-slate">
@@ -495,7 +523,11 @@ export default function Reviews() {
             <CheckCircle2 className="h-5 w-5 text-emerald-600" />
             <div>
               <p className="font-semibold text-ink-900">Thank you for your feedback! 🎉</p>
-              <p className="text-sm text-ink-700">Your review has been submitted and is now live.</p>
+              <p className="text-sm text-ink-700">
+                {lastSubmissionStatus === "published"
+                  ? "Your review has been submitted and is now live."
+                  : "Your review has been submitted and will be reviewed by our team before publishing."}
+              </p>
             </div>
           </motion.div>
         ) : null}

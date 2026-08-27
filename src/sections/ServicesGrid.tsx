@@ -90,12 +90,12 @@ function ServiceCard({ service, showDetails = false }: ServiceCardProps) {
             <ArrowRight className="h-4 w-4" />
           </Link>
 
-          <Link
+          {/* <Link
             to="/services"
             className="inline-flex items-center justify-center gap-2 rounded-full border border-sky-200 bg-white px-4 py-2.5 text-sm font-semibold text-sky-700 transition-all duration-200 hover:-translate-y-0.5 hover:border-sky-300 hover:bg-sky-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 focus-visible:ring-offset-white active:translate-y-0"
           >
             See details
-          </Link>
+          </Link> */}
         </div>
       </div>
     </article>

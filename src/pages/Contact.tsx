@@ -59,7 +59,7 @@ export default function Contact() {
       <PageHeader
         eyebrow="Contact"
         title="Get your free, no-obligation quote"
-        description="Tell us a bit about your property and we'll follow up with pricing and next available dates."
+        description="Tell us a bit about your property and we'll follow up with next available dates."
       />
 
       <section className="pb-28 pt-4">

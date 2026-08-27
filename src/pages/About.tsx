@@ -8,6 +8,7 @@ import Stats from "@/sections/Stats";
 import WhyUs from "@/sections/WhyUs";
 import ServiceAreas from "@/sections/ServiceAreas";
 import CTA from "@/sections/CTA";
+import Process from "@/sections/Process";
 
 const trustBadges = [
   { icon: ShieldCheck, label: "Fully insured" },
@@ -18,14 +19,14 @@ const trustBadges = [
 
 const storyTimeline = [
   {
-    year: "2016",
+    year: "2023",
     title: "One ladder, one truck",
     detail: "Started with purified water, a neighbourhood list, and a standard no one would compromise.",
     image:
       "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=1200&q=80",
   },
   {
-    year: "2019",
+    year: "2025",
     title: "First 500 homes",
     detail: "Word of mouth turned small jobs into a repeatable service people could trust.",
     image:
@@ -173,22 +174,22 @@ export default function About() {
   return (
     <>
       <PageHeader
-        eyebrow="About Stone Cliff Window Cleaning"
+        eyebrow="About Saffron Window Cleaning"
         title="A local team that turns routine cleaning into a smoother, calmer experience"
-        description="We started Stone Cliff Window Cleaning to bring a genuinely local, detail-first standard to window cleaning — and that's still the whole job today."
+        description="We started Saffron Window Cleaning to bring a genuinely local, detail-first standard to window cleaning — and that's still the whole job today."
       />
 
       <Stats />
       <StoryTimeline />
 
-      <section className="pb-24">
-        <div className="container-page">
-          <div className="mb-8 text-center">
+      {/* <section className="pb-24"> */}
+        {/* <div className="container-page"> */}
+          {/* <div className="mb-8 text-center">
             <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-sky-700">How it works</p>
             <h2 className="mt-3 text-3xl font-semibold text-ink-900 sm:text-4xl">A simple booking flow, built to remove friction.</h2>
-          </div>
-
-          <div className="grid gap-4 md:grid-cols-3">
+          </div> */}
+<Process/>
+          {/* <div className="grid gap-4 md:grid-cols-3">
             {steps.map(({ step, title, time, description, href }, index) => (
               <RevealOnScroll key={step} delay={index * 80}>
                 <Link
@@ -218,17 +219,17 @@ export default function About() {
                 </Link>
               </RevealOnScroll>
             ))}
-          </div>
-        </div>
-      </section>
+          </div> */}
+        {/* </div> */}
+      {/* </section> */}
 
-      <section className="pb-24">
+      {/* <section className="pb-24">
         <div className="container-page">
           <div className="rounded-[2rem] border border-sky-200/70 bg-white/80 p-6 shadow-[0_18px_50px_-28px_rgba(11,31,51,0.28)] backdrop-blur-xl sm:p-8">
             <div className="flex flex-wrap items-center justify-center gap-3 text-center">
               {[
-                { value: "10+", label: "Years" },
-                { value: "1,000+", label: "Homes cleaned" },
+                { value: "2+", label: "Years" },
+                { value: "100+", label: "Homes cleaned" },
                 { value: "92%", label: "Repeat clients" },
                 { value: "0 ads", label: "Referral driven" },
               ].map((item) => (
@@ -240,7 +241,7 @@ export default function About() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <WhyUs />
       <ServiceAreas />

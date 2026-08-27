@@ -105,7 +105,7 @@ export default function Hero() {
 
           <div className="mt-8 grid gap-3 sm:grid-cols-3">
             <FloatingStat title="Rated" subtitle="4.9/5 from local clients" icon={Star} />
-            <FloatingStat title="Experience" subtitle="10+ years of detail-led service" icon={ShieldCheck} />
+            <FloatingStat title="Experience" subtitle="3+ years of detail-led service" icon={ShieldCheck} />
             <FloatingStat title="Response" subtitle="Same-week visits available" icon={Clock3} />
           </div>
         </motion.div>
@@ -130,14 +130,14 @@ export default function Hero() {
                 loading="eager"
               />
 
-              <motion.div
+              {/* <motion.div
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.25, duration: 0.45 }}
                 className="absolute left-4 top-4 rounded-full border border-white/70 bg-white/85 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.3em] text-sky-700 shadow-sm backdrop-blur"
               >
                 Before & after
-              </motion.div>
+              </motion.div> */}
 
               <motion.div
                 initial={{ opacity: 0, x: 10 }}

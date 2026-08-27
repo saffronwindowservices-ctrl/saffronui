@@ -46,14 +46,14 @@ export const BRAND = {
 
 export const HERO_BADGES: string[] = [
   "Fully Insured",
-  "10+ Years Experience",
+  "3+ Years Experience",
   "5-Star Rated",
   "Family Owned",
 ];
 
 export const STATS: Stat[] = [
-  { value: "1,000+", label: "Homes Cleaned" },
-  { value: "10+", label: "Years Experience" },
+  { value: "100+", label: "Homes Cleaned" },
+  { value: "3+", label: "Years Experience" },
   { value: "4.9/5", label: "Average Rating" },
   { value: "92%", label: "Repeat Clients" },
 ];
@@ -159,7 +159,7 @@ export const SERVICES: Service[] = [
 
 export const WHY_US: { icon: typeof ShieldCheck; label: string }[] = [
   { icon: BadgeCheck, label: "Experienced Team" },
-  { icon: Leaf, label: "Eco-Friendly Cleaning" },
+  // { icon: Leaf, label: "Eco-Friendly Cleaning" },
   { icon: Clock, label: "Reliable Scheduling" },
   { icon: ShieldCheck, label: "Satisfaction Guaranteed" },
   { icon: PiggyBank, label: "Affordable Pricing" },
@@ -231,7 +231,7 @@ export const FAQS: FaqItem[] = [
   {
     question: "Are you fully insured?",
     answer:
-      "Yes — Stone Cliff Window Cleaning is fully insured for residential and commercial work, so you're covered for complete peace of mind on every visit.",
+      "Yes — Saffron Window Cleaning is fully insured for residential and commercial work, so you're covered for complete peace of mind on every visit.",
   },
   {
     question: "What types of windows can you clean?",

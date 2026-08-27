@@ -209,7 +209,7 @@ export default function Testimonials() {
           </div>
         </RevealOnScroll>
 
-        <RevealOnScroll>
+        {/* <RevealOnScroll>
           <div className="mb-10 rounded-[2rem] border border-sky-200/80 bg-gradient-to-r from-amber-50 via-white to-sky-50 p-5 shadow-[0_18px_48px_-24px_rgba(15,24,42,0.22)] sm:p-7">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div>
@@ -224,7 +224,7 @@ export default function Testimonials() {
               </button>
             </div>
           </div>
-        </RevealOnScroll>
+        </RevealOnScroll> */}
 
         {reviews.length === 0 ? (
           <div className="glass-panel p-10 text-center">
