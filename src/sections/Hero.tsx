@@ -12,7 +12,7 @@ import {
 import type { LucideIcon } from "lucide-react";
 import { Link } from "react-router-dom";
 import { BRAND, HERO_BADGES } from "@/data/content";
-import sampleImage from "../../public/logo.jpeg";
+import sampleImage from "../../src/logo.jpeg";
 // const sampleImage = `data:image/svg+xml;utf8,${encodeURIComponent(
 //   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 900"><rect width="800" height="900" rx="48" fill="#f7fbff" /><rect x="80" y="120" width="640" height="620" rx="40" fill="#ffffff" stroke="#dceefc" stroke-width="10" /><rect x="140" y="180" width="520" height="500" rx="24" fill="url(#g)" /><rect x="180" y="250" width="440" height="360" rx="18" fill="#ffffff" opacity="0.95" /><rect x="210" y="280" width="180" height="220" rx="10" fill="#ecf8ff" /><rect x="410" y="280" width="160" height="220" rx="10" fill="#dff3ff" /><path d="M180 560h440" stroke="#8ecff0" stroke-width="8" stroke-linecap="round" /><circle cx="620" cy="220" r="42" fill="#2e90d9" opacity="0.2" /><circle cx="580" cy="230" r="20" fill="#2e90d9" opacity="0.35" /><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#eaf7ff" /><stop offset="100%" stop-color="#c7e9fb" /></linearGradient></defs></svg>`
 // )}`;

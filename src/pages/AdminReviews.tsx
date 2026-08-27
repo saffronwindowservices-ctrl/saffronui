@@ -6,8 +6,8 @@ import { Check, Trash2 } from "lucide-react";
 
 // Dev-only lightweight admin gate; configure via env var VITE_ADMIN_PASSWORD or REACT_APP_ADMIN_PASSWORD
 const ADMIN_PASSWORD =
-  (typeof import.meta !== "undefined" && (import.meta as any).env && (import.meta as any).env.VITE_ADMIN_PASSWORD) ||
-  (typeof process !== "undefined" && process.env && (process.env.REACT_APP_ADMIN_PASSWORD || process.env.ADMIN_PASSWORD)) ||
+  // (typeof import.meta !== "undefined" && (import.meta as any).env && (import.meta as any).env.VITE_ADMIN_PASSWORD) ||
+  // (typeof process !== "undefined" && process.env && (process.env.REACT_APP_ADMIN_PASSWORD || process.env.ADMIN_PASSWORD)) ||
   "devadmin"; // fallback for local development
 const VITE_ADMIN_PASSWORD="devadmin";
 export default function AdminReviews() {
