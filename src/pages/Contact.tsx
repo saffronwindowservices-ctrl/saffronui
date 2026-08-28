@@ -2,13 +2,14 @@ import { useState } from "react";
 import emailjs from "@emailjs/browser";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { Phone, Mail, MapPin, Clock, Send, Loader2 } from "lucide-react";
+import { Phone, Mail, MapPin, Clock, Send, Loader2, MessageCircle } from "lucide-react";
 import PageHeader from "@/components/PageHeader";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import { BRAND, SERVICE_OPTIONS } from "@/data/content";
 import type { ContactFormValues } from "@/types";
 
 const RECIPIENT_EMAIL = "patelshubh5009@gmail.com";
+const WHATSAPP_LINK = "https://wa.me/12896882963?text=Hi%20Saffron%20Window%20Cleaning%2C%20I%20would%20like%20a%20free%20quote.";
 
 export default function Contact() {
   const [submitting, setSubmitting] = useState(false);
@@ -76,6 +77,20 @@ export default function Contact() {
                     <p className="text-sm text-slate dark:text-ink-100">Call or text</p>
                     <a href={BRAND.phoneHref} className="font-medium text-ink-800 dark:text-cloud">
                       {BRAND.phone}
+                    </a>
+                  </div>
+                </li>
+                <li className="flex items-start gap-3">
+                  <MessageCircle className="mt-0.5 h-5 w-5 shrink-0 text-sky-600 dark:text-glass" />
+                  <div>
+                    <p className="text-sm text-slate dark:text-ink-100">WhatsApp</p>
+                    <a
+                      href={WHATSAPP_LINK}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="font-medium text-ink-800 underline decoration-sky-500 underline-offset-4 dark:text-cloud"
+                    >
+                      Message us on WhatsApp
                     </a>
                   </div>
                 </li>
